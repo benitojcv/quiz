@@ -17,7 +17,8 @@ var sequelize = new Sequelize(DB_name, user, pwd, {
 		port: port,
 		host: host,
 		storage: storage, // solo SQLite (.env)
-		omitNull: true	  // solor Postgres
+		omitNull: true,	  // solor Postgres
+		native: true
 	});
 
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
