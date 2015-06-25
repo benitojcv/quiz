@@ -11,9 +11,6 @@ var port     = (url[5] || null);
 var host     = (url[4] || null);
 var storage = process.env.DATABASE_STORAGE;
 
-console.error(protocol);
-console.error(storage);
-
 var sequelize = new Sequelize(DB_name, user, pwd, {
 		dialect: protocol,
 		protocol: protocol,
