@@ -1,0 +1,10 @@
+A&ntilde;adir pregunta: <p>
+
+    <form method="post" action="/quizes/create">
+	<label for="preg" class="rem">Pregunta:</label> 
+	<input type="text" name="quiz[pregunta]" value="<%= quiz.pregunta %>" /> <p>
+	<label for="resp" class="rem">Respuesta:</label>
+	<input type="text" name="quiz[respuesta]" value="<%= quiz.respuesta %>" /> <p>
+	<a href="/"><button type="button">Cancelar</button></a>
+	<input type="submit" value="Salvar" />
+    </form>
