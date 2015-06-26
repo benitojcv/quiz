@@ -18,7 +18,7 @@ exports.index = function(req, res, next) {
 	var cond = "%";
 	if (req.query.search)
 		cond += new String(req.query.search).replace(/\s/g,"%") + "%";
-	models.Quiz.findAll({where: ["pregunta like ?", cond]}).then(function(quizes){
+	models.Quiz.findAll({where: ["pregunta like ?", cond], order: [['pregunta', 'ASC']]}).then(function(quizes){
 		res.render('quizes/index', { quizes : quizes });
 	}).catch(function(error) { 
 		next(error); 
