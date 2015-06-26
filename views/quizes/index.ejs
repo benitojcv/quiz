@@ -1,3 +1,9 @@
+<form type="get" action="/quizes">
+	<label>Buscar:</label>
+	<input type="text" name="search" />
+	<input type="submit" value="Enviar" />
+</form>
+<p>
 <table>
 	<% for (q in quizes) { %>
 		<tr><td><a href="quizes/<%= quizes[q].id %>"><%= quizes[q].pregunta %></a></td></tr>
