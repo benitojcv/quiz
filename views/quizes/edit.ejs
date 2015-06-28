@@ -1,0 +1,8 @@
+<label>Edite la pregunta:</label><p>
+    <form method="post" action="/quizes/<%= quiz.id %>?_method=put">
+	<label for="preg" class="rem">Pregunta:</label>
+	<input type="text" name="quiz[pregunta]" value="<%= quiz.pregunta %>" /> <p>
+	<label for="resp" class="rem">Respuesta:</label>
+	<input type="text" name="quiz[respuesta]" value="<%= quiz.respuesta %>" /> <p>
+	<input type="submit" value="Enviar" />
+    </form>

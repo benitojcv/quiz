@@ -6,6 +6,15 @@
 <p>
 <table>
 	<% for (q in quizes) { %>
-		<tr><td><a href="quizes/<%= quizes[q].id %>"><%= quizes[q].pregunta %></a></td></tr>
+		<tr>
+		<td><a href="quizes/<%= quizes[q].id %>"><%= quizes[q].pregunta %></a> (<%= quizes[q].tema %>)</td>
+		<td><a href="quizes/<%= quizes[q].id %>/edit"><button name="Editar">Editar</button></a></td>
+		<td>
+		<form method="post" action="quizes/<%= quizes[q].id %>?_method=delete">
+		<input type="submit" onClick="return confirm('Borrar: <%= quizes[q].pregunta %>');" value="borrar" />
+		</form> 
+		</td>
+		</tr>
+
 	<% } %>
 </table>
