@@ -29,7 +29,7 @@ exports.create = function(req, res) {
 		if (err) {
 			res.render('quizes/new', { quiz: quiz, errors: err.errors});
 		} else {
-			quiz.save({ fields: ["pregunta", "respuesta"] }).then(function() {
+			quiz.save({ fields: ["pregunta", "respuesta", "tema"] }).then(function() {
 				res.redirect("/quizes");
 			}); 
 		}
@@ -84,7 +84,7 @@ exports.update = function(req, res) {
 			})
 		} else {
 			req.quiz
-			.save( { fields: ["pregunta", "respuesta"]})
+			.save( { fields: ["pregunta", "respuesta", "tema"]})
 			.then(function() {
 				res.redirect('/quizes');
 			});
