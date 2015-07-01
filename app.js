@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 // autologout
 app.use(function(req, res, next) {
 	if ((req.session.user) && (req.session.autologout)
-			&& (Date.now() - req.session.autologout > 10000)) {
+			&& (Date.now() - req.session.autologout > 120000)) { // 120000ms = 2 min
 		// Hacemos logout. No llamamos a sessionController.destroy porque ese
 		// metodo hace un redirect y eso no nos interesa en este momento
 		delete req.session.user;
