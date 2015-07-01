@@ -30,22 +30,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Guarda el path de la peticion actual para saber donde volver tras el login
 app.use(function(req, res, next) {
-  if (!req.path.match(/\/login|\/logout/)) {
-      req.session.redir = req.path;
-  }
+	if (!req.path.match(/\/login|\/logout/)) {
+		req.session.redir = req.path;
+	}
 
-  res.locals.session = req.session;
+	res.locals.session = req.session;
 
-  next();
+	next();
+});
+
+// autologout
+app.use(function(req, res, next) {
+	if ((req.session.user) && (req.session.autologout)
+			&& (Date.now() - req.session.autologout > 10000)) {
+		// Hacemos logout. No llamamos a sessionController.destroy porque ese
+		// metodo hace un redirect y eso no nos interesa en este momento
+		delete req.session.user;
+	}
+
+	req.session.autologout = Date.now();
+	next();
 });
 
 app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handlers
@@ -53,26 +66,25 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err,
-	    errors: []
-        });
-    });
+	app.use(function(err, req, res, next) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message : err.message,
+			error : err,
+			errors : []
+		});
+	});
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {},
-	errors: []
-    });
+	res.status(err.status || 500);
+	res.render('error', {
+		message : err.message,
+		error : {},
+		errors : []
+	});
 });
-
 
 module.exports = app;
